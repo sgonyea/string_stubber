@@ -36,9 +36,9 @@ module StringStubber
     def scan_text(scanner, max_text)
       start = scanner.pos
 
-      until scanner.pos > max_text || scanner.scan_until(WORD).nil?; end
+      until scanner.pos >= max_text || scanner.scan_until(WORD).nil?; end
 
-      scanner.pre_match || scanner.string[start, max_text]
+      (str = scanner.pre_match || scanner.string[start, max_text]).gsub!(SNIP, '')
     end
   end # module Base
 end # module StringStubber
