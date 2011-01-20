@@ -50,11 +50,23 @@ describe StringStubber::Base do
 
       it 'should never have trailing spaces' do
         @count.times {|x|
-          StringStubber.stub_words(@text, x) !~ /\s+?[\s\W]*?$/
+          (StringStubber.stub_words(@text, x) !~ /\s+[\s\W]+$/).should be_true
         }
       end
 
       it 'Should only have trailing non-words if they immediately follow words' do
+        regex   = /[^\w\s]/
+        scanner = StringScanner.new(@text)
+        count   = @text.split(/[^\w\s]/).count
+        puncts  = Hash[ count.times.map {
+                          scanner.scan_until(regex)
+                          [scanner.pre_match.split.count, scanner.pos - 1]
+                        }
+                  ]
+
+        @count.times {|x|
+          (StringStubber.stub_words(@text, x) !~ /\s+$/).should be_true
+        }
       end
     end # describe 'Method: stub_words'
 
