@@ -68,7 +68,3 @@ module StringStubber
     end
   end
 end
-
-class String
-  include StringStubber::CoreExt
-end
