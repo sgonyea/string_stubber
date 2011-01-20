@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "string_stubber"
 
+  s.add_dependency 'yard', '~>0.6'
+
   s.add_development_dependency 'rspec', '~>2.4'
 
   s.files         = `git ls-files`.split("\n")
