@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    string_stubber (0.0.1)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    lorem (0.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  lorem
+  string_stubber!
