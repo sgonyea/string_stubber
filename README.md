@@ -35,3 +35,5 @@ So far, so good!  Suggestions are welcome.
 # TODO
 
 stubbing from the right direction is simple to do and will be the next addition.
+  *^* done, needs specs
+left and right indexes
