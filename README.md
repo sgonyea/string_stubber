@@ -26,6 +26,7 @@ String Stubber is a simple gem that lets you stub strings, using "words" as the 
         # Grab the _complete_ words, appearing _through_ position 20
         str.stub_thru(70)
         # => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus  risus"
+
         str.stub_thru(70).size
         # => 72
 
