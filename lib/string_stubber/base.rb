@@ -1,6 +1,7 @@
 module StringStubber
   module Base
     WORD = /\b(\w+)\b/
+    SNIP = /\s*?\W+$/
 
     def stub_words(text, max_words)
       scanner = StringScanner.new(text.to_s)
@@ -16,7 +17,9 @@ module StringStubber
     end
 
     def scan_word(scanner)
-      scanner.scan_until(WORD)
+      (str = scanner.scan_until(WORD)).gsub!(SNIP, '')
+
+      return str
     end
 
     def scan_words(scanner, max_words)
@@ -29,8 +32,10 @@ module StringStubber
       start = scanner.pos
 
       until scanner.pos > max_text || scanner.scan_until(WORD).nil?; end
-        
-      return scanner.pre_match || scanner.string[start, max_text]
+      
+      (str = scanner.pre_match || scanner.string[start, max_text]).gsub!(SNIP, '')
+
+      return str
     end
   end # module Base
 end # module StringStubber
