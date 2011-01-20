@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    string_stubber (0.0.2)
+    string_stubber (0.0.3)
       yard (~> 0.6)
 
 GEM
