@@ -14,3 +14,7 @@ require 'string_stubber/core_ext'
 module StringStubber
   extend StringStubber::Base
 end
+
+class String
+  include StringStubber::CoreExt
+end
