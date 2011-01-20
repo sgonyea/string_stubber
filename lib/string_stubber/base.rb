@@ -32,7 +32,7 @@ module StringStubber
       start = scanner.pos
 
       until scanner.pos > max_text || scanner.scan_until(WORD).nil?; end
-      
+
       (str = scanner.pre_match || scanner.string[start, max_text]).gsub!(SNIP, '')
 
       return str
