@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "string_stubber"
   s.version     = StringStubber::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Scott Gonyea"]
+  s.email       = ["me@sgonyea.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Allows you to truncate Strings, while preserving whole-words.}
+  s.description = %q{StringStubber allows you to truncate Strings, while preserving whole-words.}
 
   s.rubyforge_project = "string_stubber"
 
