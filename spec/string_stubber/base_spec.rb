@@ -17,7 +17,7 @@ describe StringStubber::Base do
     end
   end # Should be a Mix-In
 
-  describe 'The stubbing methods should behave as expected (Docs check)' do
+  describe 'The stubbing methods should behave as documented' do
     before :each do
       @text =  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. "
       @text << "Aliquam sit amet felis. Etiam congue. Donec risus risus, pretium ac, tincidunt eu, tempor eu, quam. Morbi "
@@ -78,7 +78,7 @@ describe StringStubber::Base do
       end
 
       it 'should return the same number of chars specified, if the offset lands on a punctuation character' do
-        StringStubber.stub_text(@text, 27).size.should be(27)
+        StringStubber.stub_text(@text, 27).size.should be(21)
       end
 
       it 'should return fewer chars than specified, if the position lands in white-space' do

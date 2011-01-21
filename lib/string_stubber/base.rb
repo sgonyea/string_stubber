@@ -1,6 +1,6 @@
 module StringStubber
   module Base
-    WORD = /[\w[:punct:]]+/
+    WORD = /(\w+[[:punct:]]*)+/
     SNIP = /\s+$/
 
     # Stubs a given text string, up to a given number of words
@@ -36,7 +36,7 @@ module StringStubber
     #   @return [String]
     def scan_words(scanner, max_words)
       words = max_words.times.map {
-                scanner.scan_until(WORD)
+                scan_word(scanner)
               }
       words.compact!
       words.join
@@ -48,11 +48,10 @@ module StringStubber
     #   @return [String]
     def scan_text(scanner, max_text)
       start = scanner.pos
-      upto  = max_text + 1
 
-      until scanner.pos >= upto || scanner.scan_until(WORD).nil?; end
+      until scanner.pos >= max_text || scan_word(scanner).nil?; end
 
-      (scanner.pre_match || scanner.string[start, upto]).to_s.gsub(SNIP, '')
+      (scanner.pre_match || scanner.string[start, max_text]).to_s.gsub(SNIP, '')
     end
   end # module Base
 end # module StringStubber
