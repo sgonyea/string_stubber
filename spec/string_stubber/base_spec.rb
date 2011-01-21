@@ -29,7 +29,7 @@ describe StringStubber::Base do
       @count = @text.split(/\W+/).count
     end
 
-    describe 'Method: stub_words' do
+    describe 'Methods: stub_words, scan_words' do
       it 'should return the expected number of words' do
         StringStubber.stub_words(@text, 10).split(/\W+/).count.should  be(10)
       end
@@ -72,17 +72,77 @@ describe StringStubber::Base do
       #
     end # describe 'Method: stub_words'
 
-    describe 'Method: stub_text' do
-      it 'should return less than the number of chars specified, if the offset is in the middle of a word' do
+    describe 'Methods: stub_text, scan_text' do
+      it 'should return fewer chars than specified, if the offset is in the middle of a word' do
         StringStubber.stub_text(@text, 33).size.should be(27)
       end
 
-      it 'should return less than the number of chars specified, if the offset is in the middle of a word\'s punctuation' do
-        StringStubber.stub_text(@text, 33).size.should be(27)
+      it 'should return the same number of chars specified, if the offset lands on a punctuation character' do
+        StringStubber.stub_text(@text, 27).size.should be(27)
       end
 
-      it 'should return exactly the number of chars specified, if the position lands on white-space' do
+      it 'should return fewer chars than specified, if the position lands in white-space' do
+        (StringStubber.stub_text(@text, 28).size < 28).should be_true
+      end
+
+      it 'should return the whole string, if the ammt of text exceeds the amount of actual text' do
+        StringStubber.stub_text(@text, 2000).casecmp(@text).should be(0)
+      end
+
+      it 'should return a copy of the whole string, if the ammt of text exceeds the amount of actual text' do
+        (StringStubber.stub_text(@text, 2000).object_id != @text.object_id).should be_true
+      end
+
+      it 'should always return a string' do
+        stubs = [
+          StringStubber.stub_text(@text,  -2000),
+          StringStubber.stub_text(@text,     -1),
+          StringStubber.stub_text(@text,      0),
+          StringStubber.stub_text(@text,     10),
+          StringStubber.stub_text(@text,   2000)
+        ]
+
+        stubs.each {|stub|
+          stub.is_a?(String).should be_true
+        }
       end
     end # describe 'Method: stub_text'
+
+    describe 'Methods: scan_word' do
+      before :each do
+        #             #1   #2    #3   #4  #5       #6            #7      #8
+        @words = %w[Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ]
+        @wjoin = @words.join(' ')
+      end
+
+      it 'should scan ahead exactly one word' do
+        ss = StringScanner.new(@wjoin)
+
+        x = 0
+        until StringStubber.scan_word(ss).nil?
+          x += 1
+        end
+
+        x.should be(@words.count)
+      end
+
+      it 'should return the correct word' do
+        ss = StringScanner.new(@wjoin)
+        @words.each do |word|
+          StringStubber.scan_word(ss).strip.should eql(word)
+        end
+      end
+
+      it 'scan_word should return a string, unless there is no more to scan' do
+        ss  = StringScanner.new(@wjoin)
+        x   = 0
+
+        until (word = StringStubber.scan_word(ss)).nil?
+          word.should be_instance_of(String)
+        end
+
+        word.should be_nil
+      end
+    end
   end
 end

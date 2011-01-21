@@ -23,22 +23,36 @@ module StringStubber
       return scan_text(scanner, max_text)
     end
 
+    # Scans ahead one word position, and returns it
+    #   @param [StringScanner] scanner
+    #   @return [String]
     def scan_word(scanner)
       scanner.scan_until(WORD)
     end
 
+    # Scans a given number of words from a scanner
+    #   @param [StringScanner]
+    #   @param [Fixnum]
+    #   @return [String]
     def scan_words(scanner, max_words)
-      max_words.times.map {
-        scanner.scan_until(WORD)
-      }.compact.join
+      words = max_words.times.map {
+                scanner.scan_until(WORD)
+              }
+      words.compact!
+      words.join
     end
 
+    # Scans a given number of words, up to a given character position (but not beyond)
+    #   @param [StringScanner]
+    #   @param [Fixnum]
+    #   @return [String]
     def scan_text(scanner, max_text)
       start = scanner.pos
+      upto  = max_text + 1
 
-      until scanner.pos >= max_text || scanner.scan_until(WORD).nil?; end
+      until scanner.pos >= upto || scanner.scan_until(WORD).nil?; end
 
-      (str = scanner.pre_match || scanner.string[start, max_text]).gsub!(SNIP, '')
+      (scanner.pre_match || scanner.string[start, upto]).to_s.gsub(SNIP, '')
     end
   end # module Base
 end # module StringStubber
