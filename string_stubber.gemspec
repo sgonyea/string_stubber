@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Scott Gonyea"]
   s.email       = ["me@sgonyea.com"]
-  s.homepage    = ""
+  s.homepage    = "http://github.com/sgonyea/string_stubber"
   s.summary     = %q{Allows you to truncate Strings, while preserving whole-words.}
   s.description = %q{StringStubber allows you to truncate Strings, while preserving whole-words.}
 
