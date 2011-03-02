@@ -1,7 +1,7 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
-describe StringStubber::CoreExt do
-  describe 'The CoreExt module should be mixed into String (via string_stubber.rb)' do
+describe Stubber::CoreExt do
+  describe 'The CoreExt module should be mixed into String (via stubber.rb)' do
     before :each do
       @methods = [ :scanner, :stub_words, :stub_at_most, :stub_at_least ]
     end

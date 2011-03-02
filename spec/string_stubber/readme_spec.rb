@@ -2,7 +2,7 @@ require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
 # This Spec is to validate the stuff I put in the README
 #
-describe 'StringStubber::Readme' do
+describe 'Stubber::Readme' do
   it "shouldn't make me look bad" do
     #
     # str = Lorem::Base.new('paragraphs', 1).output

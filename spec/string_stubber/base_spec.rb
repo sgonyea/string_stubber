@@ -1,6 +1,6 @@
 require File.expand_path("../spec_helper", File.dirname(__FILE__))
 
-describe StringStubber::Base do
+describe Stubber::Base do
   describe 'The Base module should behave like a proper mix-in ;)' do
     before :each do
       @methods = [ :stub_words, :stub_text, :scan_word, :scan_words, :scan_text ]
@@ -8,7 +8,7 @@ describe StringStubber::Base do
 
     it 'should have class methods available' do
       class TestMixin
-        extend StringStubber::Base
+        extend Stubber::Base
       end
 
       @methods.each {|method|
@@ -31,16 +31,16 @@ describe StringStubber::Base do
 
     describe 'Methods: stub_words, scan_words' do
       it 'should return the expected number of words' do
-        StringStubber.stub_words(@text, 10).split(/\W+/).count.should  be(10)
+        Stubber.stub_words(@text, 10).split(/\W+/).count.should  be(10)
       end
 
       it 'should always return a string' do
         stubs = [
-          StringStubber.stub_words(@text,  -100),
-          StringStubber.stub_words(@text,    -1),
-          StringStubber.stub_words(@text,     0),
-          StringStubber.stub_words(@text,    10),
-          StringStubber.stub_words(@text,   100)
+          Stubber.stub_words(@text,  -100),
+          Stubber.stub_words(@text,    -1),
+          Stubber.stub_words(@text,     0),
+          Stubber.stub_words(@text,    10),
+          Stubber.stub_words(@text,   100)
         ]
 
         stubs.each {|stub|
@@ -50,7 +50,7 @@ describe StringStubber::Base do
 
       it 'should never have trailing spaces' do
         @count.times {|x|
-          (StringStubber.stub_words(@text, x) !~ /\s+[\s\W]+$/).should be_true
+          (Stubber.stub_words(@text, x) !~ /\s+[\s\W]+$/).should be_true
         }
       end
 
@@ -65,7 +65,7 @@ describe StringStubber::Base do
         #           ]
         # 
         # @count.times {|x|
-        #   (StringStubber.stub_words(@text, x) !~ /\s+$/).should be_true
+        #   (Stubber.stub_words(@text, x) !~ /\s+$/).should be_true
         # }
       end
 
@@ -74,34 +74,34 @@ describe StringStubber::Base do
 
     describe 'Methods: stub_text, scan_text' do
       it 'should return fewer chars than specified, if the offset is in the middle of a word' do
-        StringStubber.stub_text(@text, 33).size.should be(28)
+        Stubber.stub_text(@text, 33).size.should be(28)
       end
 
       it 'should return the same number of chars specified, if the offset lands on a punctuation character' do
         # This is a tough nut to crack. Eesh.
-        StringStubber.stub_text(@text, 27).should       == "Lorem ipsum dolor sit amet, "
-        StringStubber.stub_text(@text, 27).size.should  be(28)
+        Stubber.stub_text(@text, 27).should       == "Lorem ipsum dolor sit amet, "
+        Stubber.stub_text(@text, 27).size.should  be(28)
       end
 
       it 'should return fewer chars than specified, if the position lands in white-space' do
-        (StringStubber.stub_text(@text, 28).size == 28).should be_true
+        (Stubber.stub_text(@text, 28).size == 28).should be_true
       end
 
       it 'should return the whole string, if the ammt of text exceeds the amount of actual text' do
-        StringStubber.stub_text(@text, 2000).casecmp(@text).should be(0)
+        Stubber.stub_text(@text, 2000).casecmp(@text).should be(0)
       end
 
       it 'should return a copy of the whole string, if the ammt of text exceeds the amount of actual text' do
-        (StringStubber.stub_text(@text, 2000).object_id != @text.object_id).should be_true
+        (Stubber.stub_text(@text, 2000).object_id != @text.object_id).should be_true
       end
 
       it 'should always return a string' do
         stubs = [
-          StringStubber.stub_text(@text,  -2000),
-          StringStubber.stub_text(@text,     -1),
-          StringStubber.stub_text(@text,      0),
-          StringStubber.stub_text(@text,     10),
-          StringStubber.stub_text(@text,   2000)
+          Stubber.stub_text(@text,  -2000),
+          Stubber.stub_text(@text,     -1),
+          Stubber.stub_text(@text,      0),
+          Stubber.stub_text(@text,     10),
+          Stubber.stub_text(@text,   2000)
         ]
 
         stubs.each {|stub|
@@ -121,7 +121,7 @@ describe StringStubber::Base do
         ss = StringScanner.new(@wjoin)
 
         x = 0
-        until StringStubber.scan_word(ss).nil?
+        until Stubber.scan_word(ss).nil?
           x += 1
         end
 
@@ -131,7 +131,7 @@ describe StringStubber::Base do
       it 'should return the correct word' do
         ss = StringScanner.new(@wjoin)
         @words.each do |word|
-          StringStubber.scan_word(ss).strip.should == word
+          Stubber.scan_word(ss).strip.should == word
         end
       end
 
@@ -139,7 +139,7 @@ describe StringStubber::Base do
         ss  = StringScanner.new(@wjoin)
         x   = 0
 
-        until (word = StringStubber.scan_word(ss)).nil?
+        until (word = Stubber.scan_word(ss)).nil?
           word.should be_instance_of(String)
         end
 

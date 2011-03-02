@@ -1,8 +1,8 @@
-# StringStubber
+# Stubber
 
-String Stubber is a simple gem that lets you stub strings, using "words" as the unit of measure.  For example:
+Stubber is a simple gem that lets you stub strings, using "words" as the unit of measure.  For example:
 
-        require 'string_stubber'
+        require 'stubber'
         require 'lorem' # Or just add your own text
 
         str = Lorem::Base.new('paragraphs', 1).output

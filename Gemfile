@@ -1,4 +1,4 @@
-source :rubygems
+source "http://rubygems.org"
 
-# Specify your gem's dependencies in string_stubber.gemspec
+# Specify your gem's dependencies in stubber.gemspec
 gemspec

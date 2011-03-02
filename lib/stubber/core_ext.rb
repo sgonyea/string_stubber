@@ -1,8 +1,8 @@
-require 'string_stubber/base'
+require 'stubber/base'
 
-module StringStubber
+module Stubber
   module CoreExt
-    include StringStubber::Base
+    include Stubber::Base
 
     # @return [StringScanner]
     def scanner

@@ -1,7 +1,7 @@
-require 'string_stubber/version'
+require 'stubber/version'
 
-module StringStubber
-  autoload :CoreExt, 'string_stubber/core_ext'
+module Stubber
+  autoload :CoreExt, 'stubber/core_ext'
 
   module Base
     WORD = /\w+[\!\.\?]*[^\s,]/
@@ -57,4 +57,4 @@ module StringStubber
       (scanner.pre_match || scanner.string[start, max_text]).to_s
     end
   end # module Base
-end # module StringStubber
+end # module Stubber
