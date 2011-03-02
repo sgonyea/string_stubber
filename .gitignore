@@ -3,4 +3,4 @@ pkg/*
 .bundle
 *.rbc
 *.tmproj
-
+Gemfile.lock
