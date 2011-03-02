@@ -26,7 +26,7 @@ describe Stubber::CoreExt do
     end
 
     it 'should act upon the String instance, itself' do
-      @text.scanner.string.should be(@text)
+      @text.scanner.string.should == @text
     end
 
     describe 'Method: stub_words' do
