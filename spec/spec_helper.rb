@@ -1,7 +1,5 @@
-require 'bundler'
-
-Bundler.require :default
-Bundler.require :development
+require 'bundler/setup'
+require 'string_stubber'
 
 Dir[ Bundler.root.join("spec/support/**/*.rb") ].each{|f| require f}
 
