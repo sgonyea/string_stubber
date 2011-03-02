@@ -1,7 +1,10 @@
+require 'string_stubber/version'
+
 module StringStubber
+  autoload :CoreExt, 'string_stubber/core_ext'
+
   module Base
-    WORD = /(\w+[[:punct:]]*)+/
-    SNIP = /\s+$/
+    WORD = /\w+[\!\.\?]*[^\s,]/
 
     # Stubs a given text string, up to a given number of words
     #   @param [String] text      Any piece of text
@@ -49,9 +52,9 @@ module StringStubber
     def scan_text(scanner, max_text)
       start = scanner.pos
 
-      until scanner.pos >= max_text || scan_word(scanner).nil?; end
+      until scanner.pos >= (max_text + start) || scan_word(scanner).nil?; end
 
-      (scanner.pre_match || scanner.string[start, max_text]).to_s.gsub(SNIP, '')
+      (scanner.pre_match || scanner.string[start, max_text]).to_s
     end
   end # module Base
 end # module StringStubber
