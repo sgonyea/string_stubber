@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "string_stubber/version"
 
 Gem::Specification.new do |s|
-  s.name        = "string_stubber"
+  s.name        = "stubber"
   s.version     = StringStubber::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Scott Gonyea"]
