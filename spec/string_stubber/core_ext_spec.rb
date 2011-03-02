@@ -44,9 +44,9 @@ describe StringStubber::CoreExt do
       end
 
       it 'should correctly act on negative offsets' do
-        @text.stub_words(  -1).should       eql("placerat. ")
-        @text.stub_words( -10).should       eql("consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. ")
-#        @text.stub_words(  -1, true).should eql("amet, consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. ")
+        @text.stub_words( -1).should       eql("placerat. ")
+        @text.stub_words(-10).should       eql("consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. ")
+        @text.stub_words( -1, true).should eql("amet, ")
       end
 
       it 'should never have trailing spaces'

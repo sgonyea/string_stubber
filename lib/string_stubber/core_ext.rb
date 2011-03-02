@@ -1,3 +1,5 @@
+require 'string_stubber/base'
+
 module StringStubber
   module CoreExt
     include StringStubber::Base
@@ -34,7 +36,11 @@ module StringStubber
               scan_text(scanner, max_chars)
             end
 
-      scanner.unscan if str.empty? && scanner.pos > max_chars
+      begin
+        scanner.unscan if str.empty? && scanner.pos > max_chars && !scanner.pre_match.nil?
+      rescue StringScanner::Error => e
+        # Do nothing
+      end
 
       return str
     end
@@ -56,8 +62,8 @@ module StringStubber
       start = scanner.pos
       str   = scan_text(scanner, min_chars)
 
-      if((scanner.pos - start) < min_chars)
-        str << scan_word(scanner).to_s
+      if(str.size < (min_chars + start))
+        str << scanner.matched.to_s
       end
 
       str
