@@ -16,14 +16,14 @@ Stubber is a simple gem that lets you stub strings, using "words" as the unit of
         str.stub_words(5, true)
         # => ", consectetuer adipiscing elit. Vivamus vitae"
 
-        # Grab the _complete_ words, appearing _up to_ position 20
+        # Grab the _complete_ words, appearing _up to_ position 70
         str.stub_to(70)
         # => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus "
 
         str.stub_to(70).size
         # => 66
 
-        # Grab the _complete_ words, appearing _through_ position 20
+        # Grab the _complete_ words, appearing _through_ position 70
         str.stub_thru(70)
         # => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus vitae"
 
